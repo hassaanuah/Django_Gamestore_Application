@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% if game %}
+    <meta name="twitter:title" content="{{game.game_name}} at Karhu Game Store" />
+    <meta name="twitter:description" content="{{game.description}}. Explore more games on Karhu Game Store." />
+    <meta name="twitter:image" content="{{game.image.url}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="title" content="{{game.game_name}} at Karhu Game Store" />
+    <meta name="author" content="{{author.username}}" />
+    <meta name="image" src="{{game.image.url}}" />
+    <meta name="keywords" content="gaming, gamestore, karhu, django" />
+    <meta name="description" content="{{game.description}}. Explore more games on Karhu Game Store." />
+    {% else %}
+    <meta name="twitter:title" content="Karhu Game Store" />
+    <meta name="twitter:description" content="Explore the lastest games on Karhu Game Store." />
+    <meta name="twitter:image" content="{% static 'website_logo.png' %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="title" content="Karhu Game Store" />
+    <meta name="author" content="Team Karhu" />
+    <meta name="image" src="{% static 'website_logo.png' %}" />
+    <meta name="keywords" content="gaming, gamestore, karhu, django" />
+    <meta name="description" content="Explore the lastest games on Karhu Game Store." />
+    {% endif %}
+
+
+<title>Team Karhu Game Store</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="{% static 'game_server/interface.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'game_server/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'game_server/bootstrap_custom_style.css' %}" />
+
+</head>
+<body>
+
+    <div>
+        <h1 class="title">Team Karhu Game Store</h1>
+    </div>
+    <div class="topnav" id="myTopnav">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'store' %}">Store</a>
+        {% if user.is_authenticated %}
+            {% if user.type %}
+            {% if not user.type.developer %}
+            <a href="{% url 'boughtgames' %}">Bought Games</a>
+            {% else %}
+            <a href="{% url 'mygames' %}">My Games</a>
+            <a href="{% url 'addgames' %}">Add A New Game</a>
+            {% endif %}
+            {% endif %}
+            {% if user.email %}
+            <a href="{% url 'accountdetails' %}">{{request.user}} Account</a>
+            {% endif %}
+            <a href="{% url 'logout' %}">Log out</a>
+            {% if not user.type %}
+                <a href="{% url 'social_registration' %}">Register Type</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+            <a href="javascript:void(0);" class="icon" onclick="menuBarToggler()">&#9776;</a>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+  {% if messages %}
+    {% for message in messages %}
+    <div id="message{{forloop.counter}}" class="alert {{message.tags}}">
+      <span class="closebtn" onclick="messageBarHider({{forloop.counter}});">&times;</span>
+      {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>

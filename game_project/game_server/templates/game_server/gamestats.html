@@ -1,0 +1,23 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+
+  <h2>{{game.game_name}} Statistics</h2>
+  <table class="game-stats-table">
+    <tr>
+      <th>Time</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>{{game.time_added}}</td>
+      <td>Game added</td>
+    </tr>
+    {% for entry in game_purchases %}
+    <tr>
+      <td>{{entry.purchase_time}}</td>
+      <td>Game purchased</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

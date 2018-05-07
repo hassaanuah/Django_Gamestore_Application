@@ -1,0 +1,183 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$36000$219ttZ4Eew4M$oxFLevl9e1NUw73UpxQhrXaj2tySq57NpRa4wDD8d7c=",
+    "last_login": "2018-03-04T11:10:18.464Z",
+    "is_superuser": false,
+    "username": "player",
+    "first_name": "player",
+    "last_name": "player",
+    "email": "Hassaanuah@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-01-21T13:43:21.897Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$36000$ykWwk79EMenN$lH30psGDsUrWN2BBttgh+sg7ssVnWwcSgeGwnXuhgHE=",
+    "last_login": "2018-03-03T12:59:07.580Z",
+    "is_superuser": false,
+    "username": "developer",
+    "first_name": "developer",
+    "last_name": "developer",
+    "email": "Hassaanuah@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-01-21T13:43:33.958Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$36000$PeRATmURJO45$yJWQobtHkmiUc8F3yyZ0gYK1vBHEJzbmidEEVjAt4Bg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "something",
+    "first_name": "something",
+    "last_name": "something",
+    "email": "something@hotmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-02-14T18:21:21.878Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$36000$xcHG84F6ihw0$eRc6rorJMPNkAGI30UfHmoW2ttIepfvv9XZcRJ5sakQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "other_dev",
+    "first_name": "other_dev",
+    "last_name": "other_dev",
+    "email": "tommi.rasanen@aalto.fi",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2018-03-04T11:18:07.375Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "game_server.usertype",
+  "pk": 1,
+  "fields": {
+    "user_id": 1,
+    "developer": false,
+    "verification_bytes": "."
+  }
+},
+{
+  "model": "game_server.usertype",
+  "pk": 2,
+  "fields": {
+    "user_id": 2,
+    "developer": true,
+    "verification_bytes": "."
+  }
+},
+{
+  "model": "game_server.usertype",
+  "pk": 3,
+  "fields": {
+    "user_id": 3,
+    "developer": false,
+    "verification_bytes": "."
+  }
+},
+{
+  "model": "game_server.usertype",
+  "pk": 4,
+  "fields": {
+    "user_id": 4,
+    "developer": true,
+    "verification_bytes": "."
+  }
+},
+{
+  "model": "game_server.gamelist",
+  "pk": 1,
+  "fields": {
+    "user_id": 2,
+    "game_name": "Mountain Climber",
+    "category": "Action",
+    "description": "Climb up the mountain while staying ahead of the breeze. Falling off the bottom of the screen results in death and the level will restart. A level is completed by staying alive for 30 seconds. For each level of the game, the speed at which the screen moves increases.\r\n\r\nLeft and right arrow keys are used for moving. Up arrow key is used for jumping. Letting go of the up arrow key results in a shorter jump.",
+    "price": "19.90",
+    "image": "game_images/screenshot.png",
+    "url": "/static/games/mountain_climber/index.html",
+    "num_of_purchases": 0,
+    "high_score": 0,
+    "time_added": "2018-03-03T13:17:59.489Z",
+    "active": true
+  }
+},
+{
+  "model": "game_server.gamelist",
+  "pk": 2,
+  "fields": {
+    "user_id": 2,
+    "game_name": "Test Game",
+    "category": "Action",
+    "description": "Pick up stones and acquire score.",
+    "price": "9.90",
+    "image": "game_images/Screenshot_from_2018-01-30_23-18-59.png",
+    "url": "http://webcourse.cs.hut.fi/example_game.html",
+    "num_of_purchases": 1,
+    "high_score": 40,
+    "time_added": "2018-03-01T20:55:43.173Z",
+    "active": true
+  }
+},
+{
+  "model": "game_server.gamelist",
+  "pk": 3,
+  "fields": {
+    "user_id": 2,
+    "game_name": "My Awesome Game",
+    "category": "Arcade",
+    "description": "fvvdfdf",
+    "price": "7.90",
+    "image": "game_images/laser_squad_scr.png",
+    "url": "http://webcourse.cs.hut.fi/example_game.html",
+    "num_of_purchases": 1,
+    "high_score": 0,
+    "time_added": "2018-03-02T10:13:00.350Z",
+    "active": true
+  }
+},
+{
+  "model": "game_server.purchasedgames",
+  "pk": 1,
+  "fields": {
+    "user_id": 1,
+    "game": 1,
+    "high_score": 0,
+    "game_state": "",
+    "purchase_time": "2018-03-02T21:14:04.839Z"
+  }
+},
+{
+  "model": "game_server.purchasedgames",
+  "pk": 3,
+  "fields": {
+    "user_id": 1,
+    "game": 2,
+    "high_score": 40,
+    "game_state": "{\"playerItems\":[\"A rock\",\"A rock\"],\"score\":50}",
+    "purchase_time": "2018-03-03T12:33:22.313Z"
+  }
+}
+]

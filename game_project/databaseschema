@@ -1,0 +1,47 @@
+# Modify the code to update the DB schema diagram.
+# To reset the sample schema, replace everything with
+# two dots ('..' - without quotes).
+
+PurchasedGames as pg
+-
+ID PK int
+user_id int FK >- u.ID
+game int FK >- gl.ID
+high_score IntegerField
+game_state TextField
+purchase_time DateTimeField
+
+
+GameList as gl
+----
+ID PK int
+user_id int FK >- u.ID
+game_name varchar(128)
+category varchar(64)
+description varchar(512)
+price decimal(7)
+image ImageField
+url varchar(512)
+num_of_purchases positiveinteger()
+high_score IntegerField(512)
+time_added DateTimeField
+active booleanField
+
+User as u
+------------
+ID PK int
+username varchar(150)
+first_name varchar(30)
+last_name varchar(150)
+email varchar(200)
+password varchar(200)
+
+UserType as ut
+----
+ID PK int
+user_id int FK >- u.ID
+developer booleanfield
+verification_bytes varchar(64)
+
+
+# https://app.quickdatabasediagrams.com/#/schema/TLVKDqJBFkuXu30G42DU2g

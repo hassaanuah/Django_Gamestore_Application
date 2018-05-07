@@ -1,0 +1,73 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+  <h2>Store</h2>
+  <div class="store-game-page-main-container">
+  <h3>{{game.game_name}}</h3>
+  <div class="store-game-page-image-container">
+        <img src="{{game.image.url}}" alt="{{game.game_name}} screenshot" />
+  </div>
+  <p>Genre: {{game.category}}<br />
+  Author: {{author.username}}<br />
+  Release date: {{game.time_added|date:"F j, Y"}}<br />
+  Price: {{game.price}} &euro;</p>
+  <p>{{game.description|linebreaksbr}}</p>
+
+  {% if request.user.is_authenticated %}
+        {% if request.user.type.developer %}
+                <p class="action-info">You need to sign up as a non-developer to purchase games.</p>
+        {% else %}
+                {% if not owned %}
+                        <form action="http://payments.webcourse.niksula.hut.fi/pay/" method="POST">
+                        <input type="hidden" name="pid" value="{{pid}}" />
+                        <input type="hidden" name="sid" value="{{sid}}" />
+                        {% if request.is_secure %}
+                                <input type="hidden" name="success_url"
+                                        value="https://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="cancel_url"
+                                        value="https://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="error_url"
+                                        value="https://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="checksum"
+                                        value="{{checksum}}" />
+                        {% else %}
+                                <input type="hidden" name="success_url"
+                                        value="http://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="cancel_url"
+                                        value="http://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="error_url"
+                                        value="http://{{request.get_host}}/buygame" />
+                                <input type="hidden" name="checksum"
+                                        value="{{checksum}}" />
+                        {% endif %}
+                        <input type="hidden" id="id_amount" name="amount" value="{{game.price}}" />
+                        <input type="submit" value="Buy Game"/>
+                        </form>
+                {% else %}
+                        <p class="action-info">You already own this game.</p>
+                {% endif %}
+        {% endif %}
+  {% else %}
+  <p class="action-info">You need to <a href="{% url 'register' %}">register</a> or <a href="{% url 'login' %}">login</a> to buy this game.</p>
+  {% endif %}
+
+  </div>
+  {% if recommended_games %}
+  <div class="store-game-page-side-container">
+  <h4>You might also like...</h4>
+  {% for game in recommended_games %}
+  <a href="{% url 'gamestorepage' gameid=game.pk %}">
+    <div class="store-product-container small">
+      <div class="store-image-container">
+          <img src="{{ game.image.url }}" alt="" />
+      </div>
+      <div class="store-product-title">
+        {{ game.game_name }}
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+{% endblock %}

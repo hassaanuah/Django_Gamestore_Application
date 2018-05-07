@@ -1,0 +1,22 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+  <h2>Home</h2>
+  <p>Latest and best games only</p>
+  {% if latest_games %}
+  <h3>Latest releases</h3>
+  {% for game in latest_games %}
+  <a href="{% url 'gamestorepage' gameid=game.pk %}">
+    <div class="store-product-container medium">
+      <div class="store-image-container">
+          <img src="{{ game.image.url }}" alt="" />
+      </div>
+      <div class="store-product-title">
+        {{ game.game_name }}
+      </div>
+      <div class="store-product-category">Released {{game.time_added|date:"F j, Y"}}</div>
+    </div>
+  </a>
+  {% endfor %}
+  {% endif %}
+{% endblock %}

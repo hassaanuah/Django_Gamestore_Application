@@ -1,0 +1,92 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="omb_login">
+    	        <h3 class="omb_authTitle">Edit Game Details</h3>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+			</div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-gamepad"></i></span>
+                      <input class="form-control" id="id_game_name" maxlength="128" name="game_name" {% if form.game_name.value %} value="{{form.game_name.value}}" {% endif %} placeholder="Game Title" type="text" required />
+					</div>
+                    <span class="help-block">{{form.errors.game_name}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-gears"></i></span>
+                      <select class="form-control" id="id_category" name="category" required>
+                          <option value="Action" {% if form.category.value == "Action" %}selected{% endif %}>Action</option>
+                          <option value="Arcade" {% if form.category.value == "Arcade" %}selected{% endif %}>Arcade</option>
+                          <option value="Adventure" {% if form.category.value == "Adventure" %}selected{% endif %}>Adventure</option>
+                          <option value="Multiplayer" {% if form.category.value == "Multiplayer" %}selected{% endif %}>Multiplayer</option>
+                          <option value="Sports" {% if form.category.value == "Sports" %}selected{% endif %}>Sports</option>
+                          <option value="Racing" {% if form.category.value == "Racing" %}selected{% endif %}>Racing</option>
+                          <option value="Fight" {% if form.category.value == "Fight" %}selected{% endif %}>Fight</option>
+                          <option value="Strategy" {% if form.category.value == "Strategy" %}selected{% endif %}>Strategy</option>
+                          <option value="Minigame" {% if form.category.value == "Minigame" %}selected{% endif %}>Minigame</option>
+                          <option value="Puzzle" {% if form.category.value == "Puzzle" %}selected{% endif %}>Puzzle</option>
+                          <option value="Educational" {% if host.category.value == "Educational" %}selected{% endif %}>Educational</option>
+                      </select>
+					</div>
+                    <span class="help-block">{{form.errors.category}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                      <textarea class="form-control" cols="40" id="id_description" minlength="6" name="description" placeholder="Description of Game" rows="5" required>{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+					</div>
+                    <span class="help-block">{{form.errors.description}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                      <input class="form-control" id="id_price" name="price" step="0.01" type="number" {% if form.price.value %} value="{{form.price.value}}" {% endif %} placeholder="Price" required />
+					</div>
+                    <span class="help-block">{{form.errors.price}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-file-picture-o"></i></span>
+                      <input class="form-control" id="id_image" name="image" type="file" />
+					</div>
+					<span class="help-block">Image : <a href="{{ form.image.value.url }}">{{ form.image.value }}</a></span>
+                    <span class="help-block">{{form.errors.image}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                      <input class="form-control" id="id_url" maxlength="512" minlength="6" name="url" {% if form.url.value %} value="{{form.url.value}}" {% endif %} placeholder="Link of Game" type="text" required />
+					</div>
+                    <span class="help-block">{{form.errors.url}}</span>
+
+
+                    <span class="help-block">{{form.non_field_errors.0}}</span>
+
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Modify</button>
+				</form>
+              <br>
+              <a href="{% url 'mygames' %}"><button class="btn btn-lg btn-primary btn-block" type="submit">Back</button></a>
+			</div>
+    	</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+
+				</label>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

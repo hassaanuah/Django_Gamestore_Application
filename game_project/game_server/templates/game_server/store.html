@@ -1,0 +1,37 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+  <h2>Store</h2>
+  {% if not store_empty %}
+  <form action="" method="get"><label for="search">Search: </label><input id="search" name="search" type="text" /></form><br />
+  Order by:
+  <a href="?order=title" class="storebutton">Title</a>
+  <a href="?order=genre" class="storebutton">Genre</a>
+  <a href="?order=popularity" class="storebutton">Popularity</a>
+  <a href="?order=release" class="storebutton">Release</a>
+  <a href="?order=price" class="storebutton">Price</a>
+  <div id="gamelist">
+    {% if games %}
+    {% for game in games %}
+    <a href="{% url 'gamestorepage' gameid=game.pk %}">
+      <div class="store-product-container large">
+        <div class="store-image-container">
+            <img src="{{ game.image.url }}" alt="" />
+        </div>
+        <div class="store-product-title">
+          {{ game.game_name }}
+        </div>
+        <div class="store-product-category">{{ game.category }}</div>
+        <div class="store-product-price">{{ game.price }} &euro;</div>
+      </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    <p>Your search returned no matches.</p>
+    {% endif %}
+  </div>
+  {% else %}
+  <p>There are no games in the store yet. <a href="{% url 'register' %}">Sign up</a> as a developer to add your own games!</p>
+  {% endif %}
+
+{% endblock %}

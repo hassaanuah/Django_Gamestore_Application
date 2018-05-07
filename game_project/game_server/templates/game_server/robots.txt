@@ -1,0 +1,4 @@
+# Disallow verification links from getting used by email preview
+User-agent: *
+Disallow: /user_verification/
+Disallow: /reset_password/

@@ -1,0 +1,83 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+    <div class="omb_login">
+    	        <h3 class="omb_authTitle">Edit Account</h3>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+			</div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                      {% csrf_token %}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-address-book"></i></span>
+                        <input autofocus="" class="form-control" id="id_first_name" maxlength="64" name="first_name" placeholder="First name" type="text" {% if form1.first_name.value %} value="{{form1.first_name.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form1.errors.first_name}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa fa-address-book-o"></i></span>
+                        <input autofocus="" class="form-control" id="id_last_name" maxlength="64" name="last_name" placeholder="Last Name" type="text" {% if form1.last_name.value %} value="{{form1.last_name.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form1.errors.last_name}}</span>
+
+                    <span class="help-block">{{form1.non_field_errors.0}}</span>
+
+					<button class="btn btn-lg btn-primary btn-block" type="submit" name='action' value="update">Save</button>
+				</form>
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+			</div>
+		</div>
+                <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                      {% csrf_token %}
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                      <input class="form-control" type="password" maxlength="32" minlength="6" name="old_password" placeholder="Old Password" required />
+					</div>
+                    <span class="help-block">{{form2.errors.password}}</span>
+
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                      <input class="form-control" id="id_password" maxlength="32" minlength="6" name="password" type="password" placeholder="New Password"  required />
+					</div>
+                    <span class="help-block">{{form2.errors.password}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input class="form-control" id="id_password1" maxlength="32" minlength="6" name="password1" type="password" placeholder="Confirm Password" required />
+					</div>
+                    <span class="help-block">{{form2.errors.password1}}</span>
+
+
+                    <span class="help-block">{{form2.non_field_errors.0}}</span>
+
+					<button class="btn btn-lg btn-primary btn-block" type="submit" name='action' value="changepassword">Change Password</button>
+				</form>
+			</div>
+    	</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+
+				</label>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+{% endblock %}

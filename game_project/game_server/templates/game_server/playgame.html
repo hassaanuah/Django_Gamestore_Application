@@ -1,0 +1,60 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+<script>
+window.addEventListener('message', function (evt) {
+  if (evt.data.messageType === 'SETTING') {
+    document.getElementById('gameFrame').height = evt.data.options.height;
+    document.getElementById('gameFrame').width = evt.data.options.width;
+  } else if (evt.data.messageType === 'SCORE') {
+    $.ajax({
+      method: 'POST',
+      url: "{% url 'communicator:gamecommunicator' %}",
+      data: {
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+        'msgtype': 'score',
+        'gameid': '{{game.pk}}',
+        'score': evt.data.score
+      }
+    });
+  } else if (evt.data.messageType === 'SAVE') {
+    $.ajax({
+      method: 'POST',
+      url: "{% url 'communicator:gamecommunicator' %}",
+      data: {
+        'csrfmiddlewaretoken': '{{ csrf_token }}',
+        'msgtype': 'save',
+        'gameid': '{{game.pk}}',
+        'gamestate': JSON.stringify(evt.data.gameState)
+      }
+    });
+  } else if (evt.data.messageType === 'LOAD_REQUEST') {
+    $.ajax({
+      method: 'GET',
+      url: "{% url 'communicator:gamecommunicator' %}",
+      data: {
+        'msgtype': 'load',
+        'gameid': '{{game.pk}}'
+      },
+      success: function (data) {
+        var msg;
+        if (data === '') {
+          msg = {
+            'messageType': 'ERROR',
+            'info': 'No saved game state exists'
+          };
+        } else {
+          msg = {
+            'messageType': 'LOAD',
+            'gameState': JSON.parse(data)
+          };
+        }
+        document.getElementById('gameFrame').contentWindow.postMessage(msg, '*');
+      }
+    });
+  }
+});
+</script>
+  <h2>{{game.game_name}}</h2>
+  <iframe id=gameFrame src="{{game.url}}"></iframe>
+{% endblock %}

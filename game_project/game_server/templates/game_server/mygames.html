@@ -1,0 +1,60 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+
+  <h2>My Added Games</h2>
+  {% if games %}
+  {% for game in games %}
+    <div onClick="gameMenuToggler({{forloop.counter0}})" class="game-list-container">
+      <div class="store-image-container">
+          <img src="{{ game.image.url }}" alt="" />
+      </div>
+      <div class="store-product-title">
+        {{ game.game_name }}
+      </div>
+			<div class="store-product-details">Click for details</div>
+			<div class="game-list-menu" id="gamemenu{{forloop.counter0}}">
+				<h3>{{game.game_name}} ({{game.category}})</h3>
+				<hr />
+				<table class="game-list-stats">
+					<tr>
+						<td>Date added:</td>
+						<td>{{game.time_added|date:"F j, Y"}}</td>
+					</tr>
+					<tr>
+						<td>Price:</td>
+						<td>{{game.price}} &euro;</td>
+					</tr>
+					<tr>
+						<td>Number of purchases:</td>
+						<td>{{game.num_of_purchases}}</td>
+					</tr>
+					<tr>
+						<td>Global highscore:</td>
+						<td>{{game.high_score}}</td>
+					</tr>
+					<tr>
+						<td>Active status:</td>
+						<td>{{game.active}}</td>
+					</tr>
+				</table>
+				{% if game.active %}
+				<a href="{% url 'gamestorepage' game.pk %}" class="storebutton">Store page</a>
+				{% endif %}
+				<a href="{% url 'gamestats' game.pk %}" class="storebutton">Statistics</a>
+				<a href="{% url 'editgame' game.pk %}" class="storebutton">Edit</a>
+				{% if game.active %}
+				<a href="{% url 'deactivategame' game.pk %}" class="storebutton">Deactivate</a>
+				{% else %}
+				<a href="{% url 'activategame' game.pk %}" class="storebutton">Activate</a>
+				{% endif %}
+				<a href="{% url 'deletegame' game.pk %}" class="storebutton">Delete</a>
+			</div>
+    </div>
+  {% endfor %}
+
+  {% else %}
+  <p>You haven't added any games yet. Go <a href="{% url 'addgames' %}">add</a> some!</p>
+  {% endif %}
+
+{% endblock %}

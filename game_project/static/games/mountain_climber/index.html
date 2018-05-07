@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="windows-1252"/>
+<title>Mountain Climber</title>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+    float: left;
+}
+#gameMenu {
+    float: left;
+    width: 160px;
+    text-align: center;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script src="game.js"></script>
+<div id="gameMenu">
+    <h2>Menu</h2>
+    <button onClick="submitLoadRequest()">Load</button><br /><br />
+    <button onClick="submitSave()">Save</button>
+</div>
+
+</body>
+</html>

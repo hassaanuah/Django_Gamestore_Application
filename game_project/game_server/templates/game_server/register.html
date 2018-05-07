@@ -1,0 +1,103 @@
+{% extends 'game_server/base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+
+
+    <div class="omb_login">
+    	        <h3 class="omb_authTitle"><a href="{% url 'login' %}">Login</a> or Sign Up</h3>
+		<div class="row omb_row-sm-offset-3 omb_socialButtons">
+    	    <div class="col-xs-4 col-sm-3">
+		        <a href="{% url 'social:begin' 'github' %}" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Github</span>
+		        </a>
+	        </div>
+        	<div class="col-xs-4 col-sm-3">
+		        <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-lg btn-block omb_btn-twitter">
+			        <i class="fa fa-twitter visible-xs"></i>
+			        <span class="hidden-xs">Twitter</span>
+		        </a>
+	        </div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+			</div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                      {% csrf_token %}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-address-book"></i></span>
+                        <input autofocus="" class="form-control" id="id_first_name" maxlength="64" name="first_name" placeholder="First name" type="text" {% if form.first_name.value %} value="{{form.first_name.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form.errors.first_name}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa fa-address-book-o"></i></span>
+                        <input autofocus="" class="form-control" id="id_last_name" maxlength="64" name="last_name" placeholder="Last Name" type="text" {% if form.last_name.value %} value="{{form.last_name.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form.errors.last_name}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
+                        <input autofocus="" class="form-control" id="id_username" maxlength="32" minlength="6" name="username" placeholder="Username" type="text" {% if form.username.value %} value="{{form.username.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form.errors.username}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input autofocus="" class="form-control" id="id_email" maxlength="64" name="email" placeholder="Email" type="text" {% if form.email.value %} value="{{form.email.value}}" {% endif %} required />
+					</div>
+					<span class="help-block">{{form.errors.email}}</span>
+
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                      <input class="form-control" id="id_password" maxlength="32" minlength="6" name="password" type="password" placeholder="Password"  required />
+					</div>
+                    <span class="help-block">{{form.errors.password}}</span>
+
+
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input class="form-control" id="id_password1" maxlength="32" minlength="6" name="password1" type="password" placeholder="Confirm Password" required />
+					</div>
+                    <span class="help-block">{{form.errors.password1}}</span>
+
+
+                  	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-address-card-o"></i> Check if Developer</span>
+                        <input autofocus="" class="form-control" id="id_user_type" name="user_type" type="checkbox"  {% if form.user_type.value %} value="{{form.user_type.value}}" {% endif %} />
+					</div>
+					<span class="help-block"></span>
+
+                    <span class="help-block">{{form.non_field_errors.0}}</span>
+
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+				</form>
+			</div>
+    	</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+
+				</label>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+
+{% endblock %}
